@@ -6,6 +6,11 @@ All files are expected to be created with one setting per line.  Each setting is
 a key-value pair separated by a `:`.  Comments may be used be beginning any line
 with `#`.
 
+Default values:
+
+ - `-l` Listen Address: `:8080`
+ - `-d` Source directory: `/etc/asterisk/snom`
+
 ## `/config`
 
 It is expected that the phone will supply its MAC address with the `?mac={mac}`
