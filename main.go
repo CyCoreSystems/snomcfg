@@ -18,12 +18,14 @@ import (
 var ErrComment = errors.New("Comment line")
 
 var dir string
+var debug bool
 
 var phoneTypeRegex = regexp.MustCompile(`snom\d{3}`)
 
 func main() {
 	addr := flag.String("l", ":8080", "Listen address")
 	flag.StringVar(&dir, "d", "/etc/asterisk/snom", "Source directory for configuration")
+	flag.BoolVar(&debug, "debug", false, "enable debug logging")
 
 	flag.Parse()
 
@@ -86,6 +88,9 @@ func config(w http.ResponseWriter, r *http.Request) {
 
 	// Write the configuration to the ResponseWriter
 	for k, v := range cfg {
+		if debug {
+			fmt.Printf("%s: %s\n", k, v)
+		}
 		fmt.Fprintf(w, "%s: %s\n", k, v)
 	}
 	return
